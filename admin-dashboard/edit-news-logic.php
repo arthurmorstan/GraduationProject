@@ -66,7 +66,7 @@ if(isset($_POST['submit'])) {
         else {
             // set all other feature to 0 if this news is 1
             if($is_featured == 1) {
-                $zero_all_is_featured_query = "UPDATE posts SET is_featured = 0";
+                $zero_all_is_featured_query = "UPDATE posts SET is_featured = 0 WHERE categories_id = $categories_id";
                 $zero_all_is_featured_result = mysqli_query($connection, $zero_all_is_featured_query);
             }
 

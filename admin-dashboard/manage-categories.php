@@ -3,7 +3,7 @@ include 'partials/header.php';
 
 $current_user_id = $_SESSION['user-id'];
 // fetch categories from database
-$query = "SELECT * FROM news_categories ORDER BY title ASC";
+$query = "SELECT * FROM news_categories WHERE active = 1 ORDER BY title ASC";
 $categories = mysqli_query($connection, $query);
 ?>
     <style>
@@ -68,8 +68,8 @@ $categories = mysqli_query($connection, $query);
       }
 
       main img {
-        width: 150px;
-        height: 90px;
+        width: 200px;
+        height: 100px;
       }
     </style>
   <!-- ======= Sidebar ======= -->
@@ -114,8 +114,8 @@ $categories = mysqli_query($connection, $query);
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="manage-news.php">
-              <i class="bi bi-circle"></i><span>Quản Lý Tin Tức</span>
+            <a href="my-post.php">
+              <i class="bi bi-circle"></i><span>Bài Viết Của Tôi</span>
             </a>
           </li>
           <?php if($group_slug == 'news-admin') : ?>
@@ -127,6 +127,11 @@ $categories = mysqli_query($connection, $query);
           <li>
             <a href="manage-categories.php">
               <i class="bi bi-circle"></i><span>Quản Lý Phân Loại</span>
+            </a>
+          </li>
+          <li>
+            <a href="manage-news.php">
+              <i class="bi bi-circle"></i><span>Quản Lý Tin Tức</span>
             </a>
           </li>
           <?php endif ?>

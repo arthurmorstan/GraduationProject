@@ -108,8 +108,8 @@ $group_slug = $group_record['slug'];
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="manage-news.php">
-              <i class="bi bi-circle"></i><span>Quản Lý Tin Tức</span>
+            <a href="my-post.php">
+              <i class="bi bi-circle"></i><span>Bài Viết Của Tôi</span>
             </a>
           </li>
           <?php if($group_slug == 'news-admin') : ?>
@@ -121,6 +121,11 @@ $group_slug = $group_record['slug'];
           <li>
             <a href="manage-categories.php">
               <i class="bi bi-circle"></i><span>Quản Lý Phân Loại</span>
+            </a>
+          </li>
+          <li>
+            <a href="manage-news.php">
+              <i class="bi bi-circle"></i><span>Quản Lý Tin Tức</span>
             </a>
           </li>
           <?php endif ?>

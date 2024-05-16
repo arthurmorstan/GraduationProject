@@ -4,7 +4,9 @@ require 'config/database.php';
 if(isset($_POST['submit'])) {
     // get form data
     $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $slug = $_POST['slug'];
     $description = filter_var($_POST['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $active = filter_var($_POST['active'], FILTER_SANITIZE_NUMBER_INT);
     $thumbnail = $_FILES['thumbnail'];
 
     if(!$title){
@@ -48,7 +50,7 @@ if(isset($_POST['submit'])) {
     } 
     else {
         // insert categories into db
-        $query = "INSERT INTO news_categories (title, description, thumbnail) VALUES ('$title', '$description', '$thumbnail_name')";
+        $query = "INSERT INTO news_categories (title, slug, description, thumbnail, active) VALUES ('$title', '$slug', '$description', '$thumbnail_name', $active)";
         $result = mysqli_query($connection, $query);
         if(mysqli_errno($connection)) {
             $_SESSION['add-categories'] = "Không thể thêm phân loại";

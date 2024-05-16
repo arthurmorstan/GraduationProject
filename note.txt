@@ -1,7 +1,16 @@
 https://www.youtube.com/watch?v=iBcjzaOvE94 (slider image)
 
 thêm hình phân loại (done)
-quản lý đường dẫn root slug
+quản lý đường dẫn root slug (done)
 thêm ảnh từ máy (done)
-countview
+nút xóa không xóa trong database (done)
+count view
 comment
+https://www.youtube.com/watch?v=yVD5fYbllic (comment tutorial)
+
+check chỉnh sửa thumbnail (hình ảnh) (done)
+thêm slug categories (done)
+chỉnh sửa upload hình ảnh trong bài viết (optional)
+upload video
+duyệt bài, phân quyền duyệt (done)
+không hiện bài đăng người khác (user) (done)

@@ -4,12 +4,9 @@ require 'config/database.php';
 if ((isset($_GET['id']))) {
     // $slug = $_SERVER['PATH_INFO'];
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-    $query = "SELECT * FROM posts WHERE id = $id LIMIT 1";
+    $query = "SELECT * FROM posts WHERE id = $id";
     $result = mysqli_query($connection, $query);
     $post = mysqli_fetch_assoc($result);
-    $views = $post['views'];
-    $views_query = "UPDATE posts SET views=$views+1 WHERE id=$id";
-    $views_result = mysqli_query($connection, $views_query);
 } else {
     header('location: ' . ROOT_URL . 'index.php');
     die();
@@ -178,7 +175,7 @@ if(isset($_SESSION['user-id'])) {
 <section class="post-header">
     <div class="header-content post-container">
         <!-- Back to pick topic section -->
-        <a href="<?= ROOT_URL ?>index.php" class="toPickTopic">Xem tin tức chủ đề khác</a>
+        <a href="index.php" class="toPickTopic">Trở Về</a>
         <!-- Title -->
         <h1 class="header-title">
             <?= $post['title'] ?>

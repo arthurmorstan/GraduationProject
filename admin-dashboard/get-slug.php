@@ -25,6 +25,8 @@ $slug = str_replace("ẫ", "a", $slug);
 $slug = str_replace("ậ", "a", $slug);
 // d
 $slug = str_replace("đ", "d", $slug);
+$slug = str_replace("Đ", "d", $slug);
+
 // e
 $slug = str_replace("é", "e", $slug);
 $slug = str_replace("è", "e", $slug);
@@ -69,6 +71,7 @@ $slug = str_replace("ũ", "u", $slug);
 $slug = str_replace("ụ", "u", $slug);
 $slug = str_replace("ư", "u", $slug);
 $slug = str_replace("ứ", "u", $slug);
+$slug = str_replace("Ứ", "u", $slug);
 $slug = str_replace("ừ", "u", $slug);
 $slug = str_replace("ử", "u", $slug);
 $slug = str_replace("ữ", "u", $slug);
@@ -79,10 +82,13 @@ $slug = str_replace("ỳ", "y", $slug);
 $slug = str_replace("ỷ", "y", $slug);
 $slug = str_replace("ỹ", "y", $slug);
 $slug = str_replace("ỵ", "y", $slug);
+// ,.?
+$slug = str_replace(",", "", $slug);
+$slug = str_replace(".", "", $slug);
+$slug = str_replace("?", "", $slug);
 
 
-
-$res = mysqli_query($connection, "SELECT * FROM posts WHERE slug = '$slug'");
+$res = mysqli_query($connection, "SELECT * FROM posts AS news_categories WHERE slug = '$slug'");
 if(mysqli_num_rows($res) > 0) {
 	$res = mysqli_query($connection, "SELECT max(id) AS id FROM posts");
 	$row = mysqli_fetch_assoc($res);

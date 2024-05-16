@@ -33,6 +33,61 @@ if (isset($_GET['id'])) {
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Thêm</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="add-news.php">
+              <i class="bi bi-circle"></i><span>Thêm Tin Tức</span>
+            </a>
+          </li>
+          <?php if($group_slug == 'news-admin') : ?>
+          <li>
+            <a href="add-user.php">
+              <i class="bi bi-circle"></i><span>Thêm Người Dùng</span>
+            </a>
+          </li>
+          <li>
+            <a href="add-categories.php">
+              <i class="bi bi-circle"></i><span>Thêm Phân Loại</span>
+            </a>
+          </li>
+          <?php endif ?>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Quản Lý</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="my-post.php">
+              <i class="bi bi-circle"></i><span>Bài Viết Của Tôi</span>
+            </a>
+          </li>
+          <?php if($group_slug == 'news-admin') : ?>
+          <li>
+            <a href="manage-user.php">
+              <i class="bi bi-circle"></i><span>Quản Lý Người Dùng</span>
+            </a>
+          </li>
+          <li>
+            <a href="manage-categories.php">
+              <i class="bi bi-circle"></i><span>Quản Lý Phân Loại</span>
+            </a>
+          </li>
+          <li>
+            <a href="manage-news.php">
+              <i class="bi bi-circle"></i><span>Quản Lý Tin Tức</span>
+            </a>
+          </li>
+          <?php endif ?>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
   </ul>
 
 </aside><!-- End Sidebar-->

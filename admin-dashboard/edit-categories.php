@@ -114,11 +114,24 @@ else{
               </div>
 
               <div class="row mb-3">
-                <label for="inputText" class="col-sm-2 col-form-label">Tên Loại</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="title" value="<?= $categories['title'] ?>">
+                  <input type="hidden" name="previous_thumbnail_name" class="form-control" value="<?= $categories['thumbnail'] ?>">
                 </div>
               </div>
+
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Tên Loại</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="title" id="title" value="<?= $categories['title'] ?>">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Slug</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="slug" id="slug" value="<?= $categories['slug'] ?>">
+                  </div>
+                </div>
 
               <div class="row mb-3">
                 <label for="inputText" class="col-sm-2 col-form-label">Miêu tả</label>
@@ -150,6 +163,65 @@ else{
 
 </main><!-- End #main -->
 
-<?php
-include 'partials/footer.php'
-?>
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Hoàng Duy</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+          Designed by <a href="#">Nguyễn Hoàng Duy</a>
+        </div>
+      </footer>
+      <!-- End Footer -->
+
+      <!-- Vendor JS Files -->
+      <script src="./assets/vendor/apexcharts/apexcharts.min.js"></script>
+      <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="./assets/vendor/chart.js/chart.umd.js"></script>
+      <script src="./assets/vendor/echarts/echarts.min.js"></script>
+      <script src="./assets/vendor/quill/quill.min.js"></script>
+      <script src="./assets/vendor/simple-datatables/simple-datatables.js"></script>
+      <!-- <script src="./assets/vendor/tinymce/tinymce.min.js"></script> -->
+      <script src="./assets/vendor/php-email-form/validate.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+      <!-- Template Main JS File -->
+      <script src="admin-dashboard/assets/js/main.js"></script>
+      <script src="main.js"></script>
+
+      <!-- slug -->
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+      <script>
+        jQuery('#title').change(function() {
+          var title = jQuery('#title').val();
+          jQuery.ajax({
+              url: 'get-slug.php',
+              type: 'POST',
+              data: 'title='+title,
+              success:function(result){
+                jQuery('#slug').val(result);
+              }
+          })
+        })
+
+        jQuery('#btn').click(function() {
+          var title = jQuery('#title').val();
+          var slug = jQuery('#slug').val();
+          jQuery.ajax({
+              url: 'add-news-logic.php',
+              type: 'POST',
+              data: 'title='+title+'&slug='+slug,
+              success:function(result){
+                // jQuery('#slug').val(result);
+              }
+          })
+        })
+      </script>
+      </body>
+
+      </html>

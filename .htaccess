@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([0-9]+)-([0-9a-zA-Z_-]+) categories-page.php?id=$1&slug=$2 [NC,L]
+RewriteRule ^([0-9]+)/([0-9a-zA-Z_-]+) single-posts.php?id=$1&slug=$2 [NC,L]

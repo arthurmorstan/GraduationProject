@@ -1,10 +1,12 @@
 <?php
 include 'partials/header.php';
 
-// fetch current user id posts from db
-$current_user_id = $_SESSION['user-id'];
-$query = "SELECT * FROM posts WHERE active = 1 ORDER BY id DESC";
-$news = mysqli_query($connection, $query);
+// fetch the current user from database
+if (isset($_SESSION['user-id'])) {
+    $current_user_id = $_SESSION['user-id'];
+    $query = "SELECT * FROM posts WHERE staff_uuid = '$id'";
+    $news = mysqli_query($connection, $query);  
+}
 
 ?>
 <style>
@@ -148,16 +150,15 @@ $news = mysqli_query($connection, $query);
 </aside><!-- End Sidebar-->
 
 <main>
-  <h2>Quản lý Tin Tức</h2>
+  <h2>Bài Viết Của Tôi</h2>
   <table id="myTable">
     <thead>
       <tr>
         <th>STT</th>
         <th>Ảnh Bìa</th>
         <th>Tiêu Đề</th>
-        <th>Slug</th>
         <th>Loại Tin</th>
-        <th>Tác Giả</th>
+        <th>Tình Trạng</th>
         <th>Xóa</th>
       </tr>
     </thead>
@@ -181,9 +182,8 @@ $news = mysqli_query($connection, $query);
           <td><?= $newss['id'] ?></td>
           <td><img src="../images/<?= $newss['thumbnail'] ?>" alt=""></td>
           <td><a href="<?= ROOT_URL ?>admin-dashboard/edit-news.php?id=<?= $newss['id'] ?>"><?= $newss['title'] ?></a></td>
-          <td><?= $newss['slug'] ?></td>
           <td><?= $categoriess['title'] ?></td>
-          <td><?= $author['first_name'] ?></td>
+          <td><?= ($newss['active'] == 1) ? 'Đã Duyệt' : 'Chờ Duyệt' ?></td>
           <td><a href="<?= ROOT_URL ?>admin-dashboard/delete-news.php?id=<?= $newss['id'] ?>" class="btn sm danger">Xóa</a></td>
         </tr>
       <?php endwhile ?>

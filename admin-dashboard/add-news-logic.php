@@ -59,12 +59,12 @@ if(isset($_POST['submit'])) {
     else {
         // set all other feature to 0 if this news is 1
         if($is_featured == 1) {
-            $zero_all_is_featured_query = "UPDATE posts SET is_featured = 0";
+            $zero_all_is_featured_query = "UPDATE posts SET is_featured = 0 WHERE categories_id = $categories_id";
             $zero_all_is_featured_result = mysqli_query($connection, $zero_all_is_featured_query);
         }
 
         // insert news to db
-        $query = "INSERT INTO posts (title, slug, body, thumbnail, categories_id, staff_uuid, is_featured) VALUES ('$title', '$slug', '$body', '$thumbnail_name', $categories_id, '$staff_uuid', $is_featured)";
+        $query = "INSERT INTO posts (title, slug, body, thumbnail, categories_id, staff_uuid, is_featured, active) VALUES ('$title', '$slug', '$body', '$thumbnail_name', $categories_id, '$staff_uuid', $is_featured, 0)";
         $result = mysqli_query($connection, $query);
 
     }

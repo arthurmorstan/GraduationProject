@@ -9,8 +9,8 @@ if(isset($_GET['id'])) {
     $update_result = mysqli_query($connection, $update_query);
 
     if(!mysqli_errno($connection)){
-    // delete the categories
-    $query = "DELETE FROM news_categories WHERE id = $id LIMIT 1";
+    // delete the categories but not in database
+    $query = "UPDATE news_categories SET active = 0 WHERE id = $id LIMIT 1";
     $result = mysqli_query($connection, $query);
     $_SESSION['delete-categories-success'] = "Xóa phân loại thành công";
     }

@@ -36,7 +36,7 @@ else {
         <!-- post -->
         <div class="post post-list clearfix">
             <div class="thumb rounded">
-                <a href="<?= ROOT_URL ?>single-posts.php?id=<?= $newss['id'] ?>">
+                <a href="<?= ROOT_URL ?><?= $newss['id'] ?>/<?= $newss['slug'] ?>">
                     <div class="inner">
                         <img src="images/<?= $newss['thumbnail'] ?>" alt="">
                     </div>
@@ -62,7 +62,7 @@ else {
                 </ul>
 
                 <h5 class="post-title">
-                    <a href="<?= ROOT_URL ?>single-posts.php?id=<?= $newss['id'] ?>">
+                    <a href="<?= ROOT_URL ?><?= $newss['id'] ?>/<?= $newss['slug'] ?>">
                         <?= $newss['title'] ?>
                     </a>
                 </h5>

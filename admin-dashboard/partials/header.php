@@ -3,7 +3,7 @@ require 'config/database.php';
 
 // check login
 if (!isset($_SESSION['user-id'])) {
-    header('location: ' . ROOT_URL . 'signin.php');
+    header('location: ' . ROOT_URL . 'login.php');
 }
 
 // fetch the current user from database
