@@ -91,7 +91,7 @@ $group_slug = $group_record['slug'];
           <?php if($group_slug == 'news-admin') : ?>
           <li>
             <a href="add-user.php">
-              <i class="bi bi-circle"></i><span>Thêm Người Dùng</span>
+              <i class="bi bi-circle"></i><span>Thêm Nhân Viên</span>
             </a>
           </li>
           <li>
@@ -115,7 +115,7 @@ $group_slug = $group_record['slug'];
           <?php if($group_slug == 'news-admin') : ?>
           <li>
             <a href="manage-user.php">
-              <i class="bi bi-circle"></i><span>Quản Lý Người Dùng</span>
+              <i class="bi bi-circle"></i><span>Quản Lý Nhân Viên</span>
             </a>
           </li>
           <li>
@@ -137,7 +137,7 @@ $group_slug = $group_record['slug'];
   </aside><!-- End Sidebar-->
 
     <main>
-      <h2>Quản lý Người Dùng</h2>
+      <h2>Quản Lý Nhân Viên</h2>
       <table id="myTable">
         <thead>
           <tr>

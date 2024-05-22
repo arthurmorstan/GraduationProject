@@ -111,7 +111,7 @@ $news = mysqli_query($connection, $query);
           <?php if ($group_slug == 'news-admin') : ?>
             <li>
               <a href="add-user.php">
-                <i class="bi bi-circle"></i><span>Thêm Người Dùng</span>
+                <i class="bi bi-circle"></i><span>Thêm Nhân Viên</span>
               </a>
             </li>
             <li>
@@ -135,7 +135,7 @@ $news = mysqli_query($connection, $query);
           <?php if ($group_slug == 'news-admin') : ?>
             <li>
               <a href="manage-user.php">
-                <i class="bi bi-circle"></i><span>Quản Lý Người Dùng</span>
+                <i class="bi bi-circle"></i><span>Quản Lý Nhân Viên</span>
               </a>
             </li>
             <li>

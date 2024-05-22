@@ -67,6 +67,22 @@
 <!-- Template Main JS File -->
 <script src="./assets/js/main.js"></script>
 <script src="main.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+    function sendEmail() {
+        Email.send({
+            Host: "smtp.gmail.com",
+            Username: "nguyenhoangduy40@gmail.com",
+            Password: "D1690DA5751D55A5D2B1790682EE1E181FEA",
+            To: 'nguyenhoangduy40@gmail.com',
+            From: document.getElementById("email").value,
+            Subject: "Ý kiến từ người dùng bệnh viện đa khoa G37",
+            Body: "And this is the body"
+        }).then(
+            message => alert(message)
+        );
+    }
+</script>
 </body>
 
 </html>

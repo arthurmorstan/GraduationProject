@@ -8,6 +8,15 @@ if(isset($_SESSION['user-id'])) {
   $result = mysqli_query($connection, $query);
   $avatar = mysqli_fetch_assoc($result);
 }
+
+// group slug
+if (isset($_SESSION['group-id'])) {
+$group_id = $_SESSION['group-id'];
+$groups_query = "SELECT * FROM `groups` WHERE id = $group_id";
+$group_result = mysqli_query($connection, $groups_query);
+$group_record = mysqli_fetch_assoc($group_result);
+$group_slug = $group_record['slug'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +27,14 @@ if(isset($_SESSION['user-id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đa Khoa G37</title>
   <link rel="stylesheet" href="CSS/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel=" stylesheet" href="CSS/slick.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
   <link rel="stylesheet" href="CSS/style.css">
   <link rel="icon" href="images/favicon.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -93,12 +104,14 @@ if(isset($_SESSION['user-id'])) {
                   <img src="<?= ROOT_URL . 'images/' . $avatar['image'] ?>" alt="Profile" class="rounded-circle" width="27px" />
 
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                  <?php if($group_slug != 'user') : ?>
                     <li>
                       <a class="dropdown-item d-flex align-items-center" href="./admin-dashboard/index.php">
                         <i class="bi bi-gear"></i>
                         <span>Dashboard</span>
                       </a>
                     </li>
+                    <?php endif ?>
                     <li>
                       <hr class="dropdown-divider" />
                     </li>

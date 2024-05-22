@@ -79,8 +79,101 @@ $categories = mysqli_query($connection, $query);
     .container h1 {
         margin-bottom: 40px;
     }
+
+    .bubbles {
+        position: relative;
+        display: flex;
+    }
+    .bubbles span {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        background-color: #4fc3dc;
+        margin: 0px 4px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 10px #4fc3dc44,
+        0 0 50px #4fc3dc,
+        0 0 100px #4fc3dc;
+        animation: animate 15s linear infinite;
+        animation-duration: calc(120s / var(--i));
+        z-index: -10;
+    }
+    .bubbles span:nth-child(even) {
+        background-color: #ff2d75;
+        box-shadow: 0 0 0 10px #ff2d7544,
+        0 0 50px #ff2d75,
+        0 0 100px #ff2d75;
+    }
+    @keyframes animate {
+        0% 
+        {
+            transform: translateY(100vh) scale(0);
+        }
+        100% 
+        {
+            transform: translateY(-10vh) scale(1);
+        }
+    }
 </style>
 <body>
+    <div class="bubbles">
+        <span style="--i:11"></span>
+        <span style="--i:24"></span>
+        <span style="--i:28"></span>
+        <span style="--i:15"></span>
+        <span style="--i:16"></span>
+        <span style="--i:22"></span>
+        <span style="--i:15"></span>
+        <span style="--i:11"></span>
+        <span style="--i:10"></span>
+        <span style="--i:27"></span>
+        <span style="--i:29"></span>
+        <span style="--i:17"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:11"></span>
+        <span style="--i:10"></span>
+        <span style="--i:27"></span>
+        <span style="--i:29"></span>
+        <span style="--i:17"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:11"></span>
+        <span style="--i:10"></span>
+        <span style="--i:27"></span>
+        <span style="--i:29"></span>
+        <span style="--i:17"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:11"></span>
+        <span style="--i:10"></span>
+        <span style="--i:27"></span>
+        <span style="--i:29"></span>
+        <span style="--i:17"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+        <span style="--i:11"></span>
+        <span style="--i:10"></span>
+        <span style="--i:27"></span>
+        <span style="--i:29"></span>
+        <span style="--i:17"></span>
+        <span style="--i:20"></span>
+        <span style="--i:23"></span>
+        <span style="--i:12"></span>
+    </div>
     <div class="ble">
     <h1>Chọn Chủ Đề Tin Tức Bạn Muốn Xem</h1>
     </div>
@@ -93,18 +186,5 @@ $categories = mysqli_query($connection, $query);
         </div>
     <?php endwhile ?>
     </div>
-
-    <script>
-        const blob = document.getElementById("blob")
-        
-        document.body.onpointermove = event => {
-            const { clientX, clientY } = event
-
-            blob.animate({
-                left: `${clientX}px`,
-                top: `${clientY}px`
-            }, {duration: 3000, fill:"forwards"});
-        }
-    </script>
 </body>
 </html>

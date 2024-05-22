@@ -1,0 +1,1 @@
+<?= $most_views['id'] ?>/<?= $most_views['slug'] ?>

@@ -64,7 +64,7 @@ if(isset($_POST['submit'])) {
         }
 
         // insert news to db
-        $query = "INSERT INTO posts (title, slug, body, thumbnail, categories_id, staff_uuid, is_featured, active) VALUES ('$title', '$slug', '$body', '$thumbnail_name', $categories_id, '$staff_uuid', $is_featured, 0)";
+        $query = "INSERT INTO posts (title, slug, body, thumbnail, categories_id, staff_uuid, is_featured, active, views, likes) VALUES ('$title', '$slug', '$body', '$thumbnail_name', $categories_id, '$staff_uuid', $is_featured, 0, 0, 0)";
         $result = mysqli_query($connection, $query);
 
     }

@@ -39,10 +39,10 @@ if (isset($_POST['submit'])) {
                         $groups_query = "SELECT * FROM `groups` WHERE id = $group_id";
                         $group_result = mysqli_query($connection, $groups_query);
 
-                        if(mysqli_num_rows($group_result) == 1) {
+                        if(mysqli_num_rows($group_result) == 1) {   
                             $group_record = mysqli_fetch_assoc($group_result);
                             $group_slug = $group_record['slug'];
-                            $array = array('news-admin', 'author');
+                            $array = array('news-admin', 'author', 'user');
                             if(in_array($group_slug,$array)) {
                                 $_SESSION['group-id'] = $group_id;
                                 $_SESSION['user-id'] = $user_uuid;
@@ -52,8 +52,11 @@ if (isset($_POST['submit'])) {
                                 if($group_slug == 'author') {
                                     $_SESSION['user_is_admin'] = false;
                                 }
+                                if($group_slug == 'user') {
+                                    $_SESSION['user_is_admin'] = false;
+                                }
                                 // log user in
-                                header('location: ' . ROOT_URL . './admin-dashboard/index.php');
+                                header('location: ' . ROOT_URL . 'index.php');
                             }
                         }
 

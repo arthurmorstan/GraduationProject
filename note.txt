@@ -4,9 +4,12 @@ thêm hình phân loại (done)
 quản lý đường dẫn root slug (done)
 thêm ảnh từ máy (done)
 nút xóa không xóa trong database (done)
-count view
-comment
+count view (done)
+like post (done)
+comment (done)
+đóng góp ý kiến cho bệnh viện (done)
 https://www.youtube.com/watch?v=yVD5fYbllic (comment tutorial)
+gorx gelm antb uadp
 
 check chỉnh sửa thumbnail (hình ảnh) (done)
 thêm slug categories (done)
@@ -14,3 +17,4 @@ chỉnh sửa upload hình ảnh trong bài viết (optional)
 upload video
 duyệt bài, phân quyền duyệt (done)
 không hiện bài đăng người khác (user) (done)
+bỏ nút xóa my post (done)

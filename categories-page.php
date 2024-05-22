@@ -3,28 +3,32 @@ include 'partials/header.php';
 
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-    $query = "SELECT * FROM posts WHERE id = $id";
-    $result = mysqli_query($connection, $query);
-    $post = mysqli_fetch_assoc($result);
+    // $query = "SELECT * FROM posts WHERE id = $id";
+    // $result = mysqli_query($connection, $query);
+    // $post = mysqli_fetch_assoc($result);
 } else {
     header('location: ' . ROOT_URL . 'index.php');
     die();
 }
 
-// fetch categories id from database
+// fetch categories id from database 1
 $query1 = "SELECT id FROM news_categories";
 $categorie_id = mysqli_query($connection, $query1);
+
+// fetch categories id from database 2
+$view_all_query = "SELECT id FROM news_categories WHERE id = $id";
+$view_all_result = mysqli_query($connection, $view_all_query);
 
 // Show featured post from database
 $featured_query = "SELECT * FROM posts WHERE is_featured = 1 AND categories_id = $id AND active = 1";
 $featured_result = mysqli_query($connection, $featured_query);
 $featured = mysqli_fetch_assoc($featured_result);
 
-// show news from db
+// show recent news from db
 $recent_query = "SELECT * FROM posts WHERE categories_id = $id AND active = 1 ORDER BY date_time DESC LIMIT 4";
 $recent_news = mysqli_query($connection, $recent_query);
 
-// show recent news from db
+// show news from db
 $query2 = "SELECT * FROM posts WHERE categories_id = $id AND active = 1 ORDER BY date_time DESC";
 $news = mysqli_query($connection, $query2);
 
@@ -43,6 +47,10 @@ $most_views_newss = mysqli_query($connection, $query5);
 // show most viewed new from db
 $query6 = "SELECT * FROM posts WHERE categories_id = $id AND active = 1 ORDER BY views DESC LIMIT 4";
 $most_views_newsss = mysqli_query($connection, $query6);
+
+// show most liked news from db
+$query7 = "SELECT * FROM posts WHERE categories_id = $id AND active = 1 ORDER BY likes DESC LIMIT 4";
+$most_likes_news = mysqli_query($connection, $query7);
 ?>
 
 
@@ -166,6 +174,33 @@ $most_views_newsss = mysqli_query($connection, $query6);
         content: "";
         display: none;
     }
+
+    .newsletter-donggop input,
+    textarea {
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .logo {
+        margin-bottom: 40px;
+    }
+
+    .section-header {
+        display: flex;
+    }
+
+    .section-header .viewMore {
+        margin-left: 300px;
+        background-color: aqua;
+        color: black;
+        width: 120px;
+        text-align: center;
+        padding: 10px;
+        border-radius: 30px;
+    }
+    .section-header .viewMore:hover {
+        background-color: rgb(1, 227, 227);
+    }
 </style>
 
 <!-- Welcome section -->
@@ -178,7 +213,7 @@ $most_views_newsss = mysqli_query($connection, $query6);
                     <div class="post featured-post-lg">
                         <div class="details clearfix">
                             <h2 class="post-title">
-                                <a href="<?= ROOT_URL ?><?= $featured['id'] ?>/<?= $featured['slug'] ?>"><?= $featured['title'] ?></a>
+                                <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $featured['id'] ?>&slug=<?= $featured['slug'] ?>"><?= $featured['title'] ?></a>
                             </h2>
                             <ul class="meta list-inline mb-0">
                                 <?php
@@ -222,23 +257,23 @@ $most_views_newsss = mysqli_query($connection, $query6);
                         <div class="tab-pane fade show active" id="popular" aria-labelledby="popular-tab" role="tabpanel">
                             <!-- post  -->
                             <?php while ($most_views = mysqli_fetch_assoc($most_views_news)) : ?>
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/<?= $most_views['thumbnail'] ?>" alt="">
-                                        </div>
-                                    </a>
+                                <div class="post post-list-sm circle">
+                                    <div class="thumb circle">
+                                        <a href="#">
+                                            <div class="inner">
+                                                <img src="images/<?= $most_views['thumbnail'] ?>" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="details clearfix">
+                                        <h6 class="post-title my-0">
+                                            <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $most_views['id'] ?>&slug=<?= $most_views['slug'] ?>"><?= $most_views['title'] ?></a>
+                                        </h6>
+                                        <ul class="meta list-inline mt-1 mb-0">
+                                            <li class="list-inline-item"><?= $most_views['views'] ?> lượt xem</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0">
-                                        <a href="#"><?= $most_views['title'] ?></a>
-                                    </h6>
-                                    <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item"><?= $most_views['views'] ?> lượt xem</li>
-                                    </ul>
-                                </div>
-                            </div>
                             <?php endwhile ?>
                         </div>
 
@@ -256,7 +291,7 @@ $most_views_newsss = mysqli_query($connection, $query6);
                                     </div>
                                     <div class="details clearfix">
                                         <h6 class="post-title my-0">
-                                            <a href="<?= ROOT_URL ?><?= $recent_newss['id'] ?>/<?= $recent_newss['slug'] ?>"><?= $recent_newss['title'] ?></a>
+                                            <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $recent_newss['id'] ?>&slug=<?= $recent_newss['slug'] ?>"><?= $recent_newss['title'] ?></a>
                                         </h6>
                                         <ul class="meta list-inline mt-1 mb-0">
                                             <li class="list-inline-item"><?= date("M d, Y - H:i", strtotime($recent_newss['date_time'])) ?></li>
@@ -279,55 +314,59 @@ $most_views_newsss = mysqli_query($connection, $query6);
         <div class="row gy-4">
             <!-- left side section -->
             <div class="col-lg-8">
+            <?php while ($view_all = mysqli_fetch_assoc($view_all_result)) : ?>
                 <div class="section-header">
                     <h3 class="section-title">Tin Được Xem Nhiều</h3>
+                    <a href="<?= ROOT_URL ?>view-all-views.php?id=<?= $view_all['id'] ?>" class="viewMore">Xem Thêm <i class="fa-solid fa-arrow-right"></i></a>
+                    </form>
                 </div>
+            <?php endwhile ?>    
 
                 <div class="padding-30 rounded bordered">
                     <div class="row gy-5">
                         <div class="col-sm-6">
                             <!-- post -->
                             <?php while ($most_viewss = mysqli_fetch_assoc($most_views_newss)) : ?>
-                            <div class="post">
-                                <div class="thumb rounded">
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/<?= $most_viewss['thumbnail'] ?>" alt="">
-                                        </div>
-                                    </a>
-                                </div>
+                                <div class="post">
+                                    <div class="thumb rounded">
+                                        <a href="#">
+                                            <div class="inner">
+                                                <img src="images/<?= $most_viewss['thumbnail'] ?>" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
 
-                                <h5 class="post-title mb-3 mt-3">
-                                    <a href="<?= ROOT_URL ?><?= $most_viewss['id'] ?>/<?= $most_viewss['slug'] ?>"><?= $most_viewss['title'] ?></a>
-                                </h5>
+                                    <h5 class="post-title mb-3 mt-3">
+                                        <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $most_viewss['id'] ?>&slug=<?= $most_viewss['slug'] ?>"><?= $most_viewss['title'] ?></a>
+                                    </h5>
 
-                                <p class="excerpt mb-0">
+                                    <p class="excerpt mb-0">
                                         <?= substr($most_viewss['body'], 0, 300) ?>....
-                                </p>
-                            </div>
+                                    </p>
+                                </div>
                             <?php endwhile ?>
                         </div>
 
                         <div class="col-sm-6">
-                        <?php while ($most_viewsss = mysqli_fetch_assoc($most_views_newsss)) : ?>
-                            <div class="post post-list-sm square">
-                                <div class="thumb rounded">
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/<?= $most_viewsss['thumbnail'] ?>" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0">
+                            <?php while ($most_viewsss = mysqli_fetch_assoc($most_views_newsss)) : ?>
+                                <div class="post post-list-sm square">
+                                    <div class="thumb rounded">
                                         <a href="#">
-                                            <?= $most_viewsss['title'] ?>
+                                            <div class="inner">
+                                                <img src="images/<?= $most_viewsss['thumbnail'] ?>" alt="">
+                                            </div>
                                         </a>
-                                    </h6>
+                                    </div>
+
+                                    <div class="details clearfix">
+                                        <h6 class="post-title my-0">
+                                            <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $most_viewsss['id'] ?>&slug=<?= $most_viewsss['slug'] ?>">
+                                                <?= $most_viewsss['title'] ?>
+                                            </a>
+                                        </h6>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endwhile ?>
+                            <?php endwhile ?>
                         </div>
                     </div>
                 </div>
@@ -347,21 +386,21 @@ $most_views_newsss = mysqli_query($connection, $query6);
                 </div>
 
                 <div class="row post-carousel-twoCol post-carousel">
-                <?php while($categoriess = mysqli_fetch_assoc($categories)) : ?>
-                    <div class="post post-over-content col-md-6">
-                        <div class="details clearfix">
-                            <h4 class="post-title">
-                            <a href="<?= ROOT_URL ?><?= $categoriess['id'] ?>-<?= $categoriess['slug'] ?>"><?= "{$categoriess['title']}" ?></a>
-                            </h4>
-                        </div>
-                        <a href="<?= ROOT_URL ?><?= $categoriess['id'] ?>-<?= $categoriess['slug'] ?>">
-                            <div class="thumb rounded">
-                                <div class="inner">
-                                    <img src="images/<?= $categoriess['thumbnail'] ?>" alt="">
-                                </div>
+                    <?php while ($categoriess = mysqli_fetch_assoc($categories)) : ?>
+                        <div class="post post-over-content col-md-6">
+                            <div class="details clearfix">
+                                <h4 class="post-title">
+                                    <a href="<?= ROOT_URL ?><?= $categoriess['id'] ?>-<?= $categoriess['slug'] ?>"><?= "{$categoriess['title']}" ?></a>
+                                </h4>
                             </div>
-                        </a>
-                    </div>
+                            <a href="<?= ROOT_URL ?><?= $categoriess['id'] ?>-<?= $categoriess['slug'] ?>">
+                                <div class="thumb rounded">
+                                    <div class="inner">
+                                        <img src="images/<?= $categoriess['thumbnail'] ?>" alt="">
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     <?php endwhile ?>
                 </div>
 
@@ -401,7 +440,7 @@ $most_views_newsss = mysqli_query($connection, $query6);
                                         ?>
                                         <ul class="meta list-inline mb-3">
                                             <li class="list-inline-item">
-                                                    <img src="./images/<?= $author_image['image'] ?>" class="author" alt="">
+                                                <img src="./images/<?= $author_image['image'] ?>" class="author" alt="">
                                                 <?= $author_name['first_name'] ?>
                                             </li>
                                             <li class="list-inline-item"><?= date("M d, Y - H:i", strtotime($newss['date_time'])) ?></li>
@@ -409,7 +448,7 @@ $most_views_newsss = mysqli_query($connection, $query6);
                                         </ul>
 
                                         <h5 class="post-title">
-                                            <a href="<?= ROOT_URL ?><?= $newss['id'] ?>/<?= $newss['slug'] ?>">
+                                            <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $newss['id'] ?>&slug=<?= $newss['slug'] ?>">
                                                 <?= $newss['title'] ?>
                                             </a>
                                         </h5>
@@ -437,9 +476,9 @@ $most_views_newsss = mysqli_query($connection, $query6);
                 <div class="sidebar">
                     <div class="widget rounded">
                         <div class="widget-about text-center">
-                            <img src="images/favicon.png" class="logo" alt="">
+                            <img src="images/logo.png" class="logo" alt="">
                             <p class="mb-4" style="text-align: justify;">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, corrupti illo placeat obcaecati magnam quod atque nemo nihil fugit voluptatibus molestiae pariatur ea? Illum molestias minus aut quod, veniam cumque!</p>
+                                Chào mừng bạn đến với Đa khoa G37! Chúng tôi tự hào là một trong những cơ sở y tế hàng đầu, cam kết mang đến dịch vụ chăm sóc sức khỏe toàn diện và chất lượng cao. Với đội ngũ y bác sĩ tận tâm, trang thiết bị hiện đại, và môi trường điều trị thân thiện, chúng tôi luôn sẵn sàng đáp ứng mọi nhu cầu y tế của bạn và gia đình. Tại Đa khoa G37, sức khỏe của bạn là sứ mệnh của chúng tôi. Hãy để chúng tôi chăm sóc và đồng hành cùng bạn trên con đường giữ gìn sức khỏe và nâng cao chất lượng cuộc sống.</p>
                         </div>
                     </div>
 
@@ -449,73 +488,27 @@ $most_views_newsss = mysqli_query($connection, $query6);
                         </div>
 
                         <div class="widget-content">
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">1</span>
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/robin.jpg" alt="">
-                                        </div>
-                                    </a>
-                                </div>
+                            <?php while ($most_likes = mysqli_fetch_assoc($most_likes_news)) : ?>
+                                <div class="post post-list-sm circle">
+                                    <div class="thumb circle">
+                                        <span class="number">1</span>
+                                        <a href="#">
+                                            <div class="inner">
+                                                <img src="./images/<?= $most_likes['thumbnail'] ?>" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
 
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0">
-                                        <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima, quisquam?</a>
-                                    </h6>
+                                    <div class="details clearfix">
+                                        <h6 class="post-title my-0">
+                                            <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $most_likes['id'] ?>&slug=<?= $most_likes['slug'] ?>"><?= $most_likes['title'] ?></a>
+                                        </h6>
+                                        <ul class="meta list-inline mt-1 mb-0">
+                                            <li class="list-inline-item"><?= $most_likes['likes'] ?> lượt yêu thích</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">2</span>
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/robin.jpg" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0">
-                                        <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima, quisquam?</a>
-                                    </h6>
-                                </div>
-                            </div>
-
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">3</span>
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/robin.jpg" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0">
-                                        <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima, quisquam?</a>
-                                    </h6>
-                                </div>
-                            </div>
-
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">4</span>
-                                    <a href="#">
-                                        <div class="inner">
-                                            <img src="images/robin.jpg" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0">
-                                        <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima, quisquam?</a>
-                                    </h6>
-                                </div>
-                            </div>
+                            <?php endwhile ?>
                         </div>
                     </div>
 
@@ -536,13 +529,16 @@ $most_views_newsss = mysqli_query($connection, $query6);
                         <div class="widget-header text-center">
                             <h3 class="widget-title">Đóng góp ý kiến</h3>
                         </div>
-                        <div class="widget-content">
+                        <div class="widget-content newsletter-donggop">
                             <span class="newsletter-headline text-center mb-3">Bạn muốn góp ý gì cho bệnh viện chúng tôi?</span>
-                            <form action="#">
+                            <form action="https://api.web3forms.com/submit" method="POST">
                                 <div class="mb-2">
-                                    <input type="email" class="form-control w-100 text-center">
+                                    <input type="hidden" name="access_key" value="158a7052-6b5a-4aa3-8420-746f072906a5">
+                                    <input type="text" name="name" id="name" class="form-control w-100 text-center" placeholder="Nhập tên của bạn (không bắt buộc)">
+                                    <input type="email" name="email" id="email" class="form-control w-100 text-center" placeholder="Nhập email của bạn" required>
+                                    <textarea rows="4" name="message" id="message" class="form-control w-100 text-center" placeholder="điền ý kiến của bạn vào đây"></textarea>
                                 </div>
-                                <button class="btn btn-default btn-full">Xác Nhận</button>
+                                <button type="submit" class="btn btn-default btn-full">Gửi</button>
                             </form>
                         </div>
                     </div>

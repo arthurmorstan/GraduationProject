@@ -1099,6 +1099,12 @@ section{
     display: block;
 }
 
+.newsletter-donggop #name {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 20px;
+}
+
 .newsletter-privacy {
     font-size: 13px;
     display: block;
@@ -1337,4 +1343,8 @@ section{
 
 .form-section-container a:hover {
     color: rgb(8, 212, 212);
+}
+
+.comments {
+    background-color: #000;
 }

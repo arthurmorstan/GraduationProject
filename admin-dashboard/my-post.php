@@ -159,7 +159,7 @@ if (isset($_SESSION['user-id'])) {
         <th>Tiêu Đề</th>
         <th>Loại Tin</th>
         <th>Tình Trạng</th>
-        <th>Xóa</th>
+        <!-- <th>Xóa</th> -->
       </tr>
     </thead>
     <tbody>
@@ -184,7 +184,7 @@ if (isset($_SESSION['user-id'])) {
           <td><a href="<?= ROOT_URL ?>admin-dashboard/edit-news.php?id=<?= $newss['id'] ?>"><?= $newss['title'] ?></a></td>
           <td><?= $categoriess['title'] ?></td>
           <td><?= ($newss['active'] == 1) ? 'Đã Duyệt' : 'Chờ Duyệt' ?></td>
-          <td><a href="<?= ROOT_URL ?>admin-dashboard/delete-news.php?id=<?= $newss['id'] ?>" class="btn sm danger">Xóa</a></td>
+          <!-- <td><a href="<?= ROOT_URL ?>admin-dashboard/delete-news.php?id=<?= $newss['id'] ?>" class="btn sm danger">Xóa</a></td> -->
         </tr>
       <?php endwhile ?>
     </tbody>

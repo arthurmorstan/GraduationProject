@@ -39,7 +39,7 @@ unset($_SESSION['add-user-data']);
           <?php if($group_slug == 'news-admin') : ?>
           <li>
             <a href="add-user.php">
-              <i class="bi bi-circle"></i><span>Thêm Người Dùng</span>
+              <i class="bi bi-circle"></i><span>Thêm Nhân Viên</span>
             </a>
           </li>
           <li>
@@ -68,7 +68,7 @@ unset($_SESSION['add-user-data']);
           </li>
           <li>
             <a href="manage-categories.php">
-              <i class="bi bi-circle"></i><span>Quản Lý Phân Loại</span>
+              <i class="bi bi-circle"></i><span>Quản Lý Nhân Viên</span>
             </a>
           </li>
           <li>
