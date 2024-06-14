@@ -51,6 +51,10 @@ $most_views_newsss = mysqli_query($connection, $query6);
 // show most liked news from db
 $query7 = "SELECT * FROM posts WHERE categories_id = $id AND active = 1 ORDER BY likes DESC LIMIT 4";
 $most_likes_news = mysqli_query($connection, $query7);
+
+// fetch dòng sự kiện
+$query8 = "SELECT * FROM posts WHERE categories_id = $id AND active = 1 ORDER BY views DESC LIMIT 3";
+$dongsukien = mysqli_query($connection, $query8);
 ?>
 
 
@@ -549,48 +553,21 @@ $most_likes_news = mysqli_query($connection, $query7);
                         </div>
                         <div class="widget-content">
                             <div class="post-carousel-widget">
-
+                                <?php while ($dongsukienn = mysqli_fetch_assoc($dongsukien)) : ?>
                                 <div class="post post-carousel">
                                     <div class="thumb rounded">
-                                        <a href="#">
+                                        <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $dongsukienn['id'] ?>&slug=<?= $dongsukienn['slug'] ?>">
                                             <div class="inner">
-                                                <img src="images/robin.jpg" alt="">
+                                                <img src="images/<?= $dongsukienn['thumbnail'] ?>" alt="">
                                             </div>
                                         </a>
                                     </div>
                                     <h5 class="post-title mb-0 mt-4">
-                                        <a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, repellat!</a>
+                                        <a href="<?= ROOT_URL ?>count_views-logic.php?id=<?= $dongsukienn['id'] ?>&slug=<?= $dongsukienn['slug'] ?>"><?= $dongsukienn['title'] ?></a>
                                     </h5>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nam quibusdam autem delectus facilis voluptatum repellendus, pariatur reprehenderit repudiandae expedita?</p>
+                                    <p><?= substr($dongsukienn['body'], 0, 100) ?></p>
                                 </div>
-
-                                <div class="post post-carousel">
-                                    <div class="thumb rounded">
-                                        <a href="#">
-                                            <div class="inner">
-                                                <img src="images/gojou.jpg" alt="">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h5 class="post-title mb-0 mt-4">
-                                        <a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, repellat!</a>
-                                    </h5>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nam quibusdam autem delectus facilis voluptatum repellendus, pariatur reprehenderit repudiandae expedita?</p>
-                                </div>
-
-                                <div class="post post-carousel">
-                                    <div class="thumb rounded">
-                                        <a href="#">
-                                            <div class="inner">
-                                                <img src="images/Unknown_person.jpg" alt="">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h5 class="post-title mb-0 mt-4">
-                                        <a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, repellat!</a>
-                                    </h5>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nam quibusdam autem delectus facilis voluptatum repellendus, pariatur reprehenderit repudiandae expedita?</p>
-                                </div>
+                                <?php endwhile ?>
                             </div>
                             <div class="slick-arrows-bot">
                                 <buttton class="carousel-botNav-prev slick-custom-buttons" type="button" data-role="none" aria-label="Previous">

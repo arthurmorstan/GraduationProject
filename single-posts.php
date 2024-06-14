@@ -1,6 +1,5 @@
 <?php
 require 'config/database.php';
-include 'comments-logic.php';
 $requestUri = $_SERVER['REQUEST_URI'];
 
 // Remove leading slash if present
@@ -367,7 +366,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
         <?php if ($user_id === $comment['user_uuid']) : ?>
         <a href="<?= ROOT_URL ?>edit-comment.php?cid=<?= $comment['cid'] ?>" class="edit">Chỉnh sửa</a>
         <?php endif; ?>
-        <?php if (($user_id === $comment['user_uuid']) || ($group_slug === 'news-admin')) : ?>
+        <?php if (($user_id === $comment['user_uuid']) || (isset($group_slug) && ($group_slug === 'news-admin'))) : ?>
         <a href="<?= ROOT_URL ?>delete-comment.php?cid=<?= $comment['cid'] ?>" class="delete">Xóa</a>
         <?php endif; ?>
       </div>
@@ -380,7 +379,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
         <div class="footer-inner">
           <div class="row d-flex align-items-center gy-4">
             <div class="col-md-4">
-              <span class="copyright">&copy; 2024 Medicare</span>
+              <span class="copyright">&copy; 2024 G37 General Hospital</span>
             </div>
             <div class="col-md-4 text-center">
               <ul class="social-icons list-unstyled list-inline mb-0">

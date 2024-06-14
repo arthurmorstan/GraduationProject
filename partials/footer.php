@@ -3,7 +3,7 @@
         <div class="footer-inner">
             <div class="row d-flex align-items-center gy-4">
                 <div class="col-md-4">
-                    <span class="copyright">&copy; 2024 Medicare</span>
+                    <span class="copyright">&copy; 2024 G37 General Hospital</span>
                 </div>
                 <div class="col-md-4 text-center">
                     <ul class="social-icons list-unstyled list-inline mb-0">

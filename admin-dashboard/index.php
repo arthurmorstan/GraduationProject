@@ -170,7 +170,7 @@ $news = mysqli_query($connection, $query);
           <th>Tác Giả</th>
           <th>Xem Trước</th>
           <th>Phê Duyệt</th>
-          <th>Xóa</th>
+          <!-- <th>Xóa</th> -->
         </tr>
       </thead>
       <tbody>
@@ -197,7 +197,7 @@ $news = mysqli_query($connection, $query);
             <td><?= $author['first_name'] ?></td>
             <td><a href="<?= ROOT_URL ?>admin-dashboard/review-news.php?id=<?= $newss['id'] ?>" class="btn sm warning">Xem Trước</a></td>
             <td><a href="<?= ROOT_URL ?>admin-dashboard/approved.php?id=<?= $newss['id'] ?>" class="btn sm success">Phê Duyệt</a></td>
-            <td><a href="<?= ROOT_URL ?>admin-dashboard/delete-news.php?id=<?= $newss['id'] ?>" class="btn sm danger">Xóa</a></td>
+            <!-- <td><a href="<?= ROOT_URL ?>admin-dashboard/delete-news.php?id=<?= $newss['id'] ?>" class="btn sm danger">Xóa</a></td> -->
           </tr>
         <?php endwhile ?>
       </tbody>

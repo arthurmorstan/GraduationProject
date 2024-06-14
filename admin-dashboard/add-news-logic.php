@@ -72,7 +72,7 @@ if(isset($_POST['submit'])) {
     if(!mysqli_errno($connection)){
         // get to sign in page
         $_SESSION['add-news-success'] = "Thêm tin thành công";
-        header('location: ' . ROOT_URL . 'admin-dashboard/manage-news.php');
+        header('location: ' . ROOT_URL . 'admin-dashboard/my-post.php');
         die();
     }
 }

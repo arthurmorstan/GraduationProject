@@ -1,0 +1,8 @@
+Table 3.1: Login UC Specification 23
+Table 3.2: Watch news UC Specification 25
+Table 3.3: Admin Dashboard for Author UC Specification 27
+Table 3.4: Posts Management for Author UC Specification 29
+Table 3.5: Posts Management for Admin UC Specification 31
+Table 3.6: Users Management for Admin UC Specification 34
+Table 3.7: Categories Management UC Specification 36
+

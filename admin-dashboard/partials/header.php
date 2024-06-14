@@ -85,7 +85,7 @@ $group_slug = $group_record['slug'];
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/y9kam4exrt9gry5hzlh6j2bjl8ocpl3eer6qwci9b9rsu8eb/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/02j09r6p7qesdd5z9b6mb2fl5rgns7l375tbxs1ju0u3l2mr/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
       tinymce.init({
         selector: 'textarea#tiny',
